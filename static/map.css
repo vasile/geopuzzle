@@ -1,0 +1,48 @@
+html { 
+    height: 100%;
+}
+
+body { 
+    height: 100%;
+}
+
+#map_page, #map_content, #map_canvas { 
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+    text-shadow: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.panel {
+    padding: 5px;
+    background: #DADADA;
+}
+
+.panel > h2 {
+    font-size: 3em;
+    margin: 0px;
+}
+
+.panel > .details {
+    font-size: 0.8em;
+    margin-top: -5px;
+}
+
+#stats_polygons {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    text-align: right;
+}
+
+#stats_time {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    text-align: right;
+}
