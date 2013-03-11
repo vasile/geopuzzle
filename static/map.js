@@ -1,3 +1,15 @@
+var app_config = {
+    geojson_feeds: {
+        Cantons: 'geojson/G3K12.geojson',
+        Districts: 'geojson/G3B12.geojson'
+    },
+    area_mask_fusion_tables_query: {
+        select: 'geometry',
+        from: '812706',
+        where: 'id = 1'
+    }
+};
+
 $(document).delegate("#map_page", "pageinit", function(){
     setTimeout(function(){
         $("#game_init").panel("open");
@@ -5,6 +17,88 @@ $(document).delegate("#map_page", "pageinit", function(){
 });
 
 $(document).delegate("#map_page", "pagebeforecreate", function(){
+    var app_data = (function(){
+        var data = [];
+        $.each(app_config.geojson_feeds, function(k, geojson_url){
+            var overlays = [];
+            var area_bounds = new google.maps.LatLngBounds();
+            $.ajax(geojson_url, {
+              dataType: "json",
+              async: false,
+              success: function(data) {
+                  $.each(data.features, function(k, feature){
+                      var feature_polygons = null;
+                      if ((feature.geometry.type === 'Polygon')) {
+                          feature_polygons = [feature.geometry.coordinates];
+                      } else {
+                          feature_polygons = feature.geometry.coordinates;
+                      }
+
+                      var paths = [];
+                      var bounds = new google.maps.LatLngBounds();
+                      $.each(feature_polygons, function(k, polygon_coordinates){
+                          $.each(polygon_coordinates, function(k, feature_paths){
+                              var path = [];
+                              $.each(feature_paths, function(k, point){
+                                  var latlng = new google.maps.LatLng(point[1], point[0]);
+                                  path.push(latlng);
+
+                                  bounds.extend(latlng);
+                                  area_bounds.extend(latlng);
+                              });
+                              paths.push(path);
+                          });
+                      });
+
+                      var overlay = {
+                          paths: paths,
+                          bounds: bounds,
+                          properties: feature.properties,
+                          id: k
+                      };
+                      overlays.push(overlay);
+                  });
+                }
+            });
+            data.push({
+                name: k,
+                overlays: overlays,
+                bounds: area_bounds
+            });
+        });
+        
+        return data;
+    })();
+    
+    var game_type = (function(){
+        var type_id = 0;
+        if (app_data.length > 1) {
+            var game_type_rows = [];
+            $.each(app_data, function(k, row){
+                var game_type_row = '<input type="radio" name="game_type" id="game_type_' + row.name + '" value="' + k + '"' + (k === 0 ? ' checked="checked"' : '') + ' /><label for="game_type_' + row.name + '">' + row.name + '</label>';
+                game_type_rows.push(game_type_row);
+            });
+            $('#game_types').html(game_type_rows.join("\n"));
+            $('#game_type').removeClass('hidden');
+        }
+        
+        function setTypeId(value) {
+            type_id = value;
+            $('#polygon_stats').html("0/" + app_data[type_id].overlays.length);
+        }
+        setTypeId(type_id);
+        
+        $('#game_type input:radio').change(function(){
+            setTypeId($(this).val());
+        });
+        
+        return {
+            getId: function(){
+                return type_id;
+            }
+        };
+    })();
+    
     $("#game_init").panel({
         display: 'push',
         dismissible: false
@@ -16,27 +110,31 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
     });
     
     var map = (function(){
-        var mapBounds = new google.maps.LatLngBounds(new google.maps.LatLng(45.78, 5.87), new google.maps.LatLng(47.87, 10.57));
+        var mapBounds = app_data[game_type.getId()].bounds;
         
         var mapOptions = {
             center: mapBounds.getCenter(),
             zoom: 8,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            disableDefaultUI: true
+            
+            
+            streetViewControl: false,
+            panControl: false,
+            mapTypeControlOptions: {
+                position: google.maps.ControlPosition.TOP_LEFT
+            }
         };
         var map = new google.maps.Map($("#map_canvas")[0], mapOptions);
         map.fitBounds(mapBounds);
-
-        var layer = new google.maps.FusionTablesLayer({
-            suppressInfoWindows: true,
-            clickable: false,
-            map: map,
-            query: {
-                select: 'geometry',
-                from: '812706',
-                where: 'id = 1'
-            }
-        });
+        
+        if (app_config.area_mask_fusion_tables_query !== null) {
+            var layer = new google.maps.FusionTablesLayer({
+                suppressInfoWindows: true,
+                clickable: false,
+                map: map,
+                query: app_config.area_mask_fusion_tables_query
+            });            
+        }
         
         return map;
     })();
@@ -48,6 +146,12 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                     "featureType": "road",
                     "stylers": [
                         { "weight": 0.4 }
+                    ]
+                },{
+                    "featureType": "road",
+                    "elementType": "labels",
+                    "stylers": [
+                        { "visibility": "off" }
                     ]
                 },{
                     "featureType": "road.highway",
@@ -131,28 +235,49 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                 s_no += 1;
             }
 
-            function init() {
+            function start() {
+                s_no = 0;
                 interval = setInterval(paintTimer, 1000);
+                $('#stats_time').removeClass('hidden');
             }
             
             function stop() {
                 clearInterval(interval);
+                $('#stats_time').addClass('hidden');
             }
             
             return {
-                init: init,
+                start: start,
                 stop: stop
             };
         })();
         
-        var overlays = [];
-        var ids_notpainted = [];
-        var ids_matched = 0;
+        var overlays, ids_notpainted, ids_matched_no, lastPolygon;
+
+        function game_init() {
+            ids_notpainted = [];
+            
+            overlays = app_data[game_type.getId()].overlays;
+            $.each(overlays, function(k, overlay){
+                if ((typeof overlay.polygon) !== 'undefined') {
+                    overlay.polygon.setMap(null);
+                }
+                
+                ids_notpainted.push(overlay.id);
+            });
+            ids_matched_no = 0;
+            lastPolygon = null;
+            
+            $('#load_polygon').button("enable");
+
+            timer.start();
+            paintPolygon();
+        }
         
-        var lastPolygon = null;
-        
-        var paintPolygon = function() {
+        $("#game_init").on("panelclose", game_init);
+        function paintPolygon() {
             if (ids_notpainted.length === 0) {
+                $('#load_polygon').button("disable");
                 return;
             }
 
@@ -229,11 +354,11 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                     });
 
                     paintPolygon();
-                    ids_matched += 1;
+                    ids_matched_no += 1;
                     
-                    $('#polygon_stats').html(ids_matched + "/" + overlays.length);
+                    $('#polygon_stats').html(ids_matched_no + "/" + overlays.length);
                     
-                    if (ids_matched === overlays.length) {
+                    if (ids_matched_no === overlays.length) {
                         timer.stop();
                         $('#timer_stats_final').html($('#timer_stats').html());
                         $("#game_end").panel("open");
@@ -241,66 +366,11 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                 }
             });
         };
-        
-        $("#game_init").on("panelclose", function(event, ui){
-            $('#stats_time').removeClass('hidden');
-            timer.init();
-            paintPolygon();
-        });
-        
+
         $('#load_polygon').click(paintPolygon);
-
-        function load(type) {
-            var pathsGeoJSON = {
-                'cantons': 'geojson/G3K12.geojson',
-                'districts': 'geojson/G3B12.geojson'
-            };
-            
-            $.getJSON(pathsGeoJSON[type], function(data) {
-                $('#polygon_stats').html("0/" + data.features.length);
-                $.each(data.features, function(k, feature){
-                    var feature_polygons = null;
-                    if ((feature.geometry.type === 'Polygon')) {
-                        feature_polygons = [feature.geometry.coordinates];
-                    } else {
-                        feature_polygons = feature.geometry.coordinates;
-                    }
-
-                    var paths = [];
-                    var bounds = new google.maps.LatLngBounds();
-                    $.each(feature_polygons, function(k, polygon_coordinates){
-                        $.each(polygon_coordinates, function(k, feature_paths){
-                            var path = [];
-                            $.each(feature_paths, function(k, point){
-                                var latlng = new google.maps.LatLng(point[1], point[0]);
-                                path.push(latlng);
-
-                                bounds.extend(latlng);
-                            });
-                            paths.push(path);
-                        });
-                    });
-
-                    var overlay = {
-                        paths: paths,
-                        bounds: bounds,
-                        properties: feature.properties,
-                        id: k
-                    };
-                    overlays.push(overlay);
-
-                    ids_notpainted.push(k);
-                });
-            });
-        }
-        var selector = $('#game_type input:radio');
-        selector.change(function(){
-            load($(this).val());
+        
+        $('#new_game').click(function(){
+            $("#game_init").panel("open");
         });
-        load(selector.val());
     })();
-
-    $('#new_game').click(function(){
-        document.location.reload();
-    });
 });

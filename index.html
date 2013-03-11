@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title>Swiss geopuzzle</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
+        <link href="static/map.css" rel="stylesheet" type="text/css" />
+
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJkc_vUlnZCJzXfLWJR3oOeLbtEOoElpA&amp;sensor=false"></script>
+    
+        <script src="static/map.js"></script>
+        
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-1022230-2']);
+          _gaq.push(['_setDomainName', '.vasile.ch']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>
+    </head>
+
+    <body>
+        <div data-role="page" id="map_page">
+            <div data-role="panel" id="game_init">
+                <div class="panel-content">
+                    <h2>Swiss GeoPuzzle</h2>
+                    <p>Scope of this game is to drag each geographical entity over its correct position on the map</p>
+
+                    <fieldset data-role="controlgroup" data-type="horizontal" id="game_type" class="hidden">
+                        <legend>Choose the game type:</legend>
+                        <div id="game_types"></div>
+                    </fieldset>
+                
+                    <fieldset data-role="controlgroup" data-type="horizontal" id="difficulty">
+                        <legend>Choose difficulty:</legend>
+                        <input type="radio" name="difficulty" id="difficulty_easy" value="easy" checked="checked" />
+                        <label for="difficulty_easy">Easy</label>
+                        <input type="radio" name="difficulty" id="difficulty_hard" value="hard" />
+                        <label for="difficulty_hard">Hard</label>
+                    </fieldset>
+                
+                    <input type="button" data-rel="close" data-icon="arrow-r" data-inline="true" value="START" data-theme="e" />
+                </div>
+            </div>
+            <div data-role="panel" id="game_end">
+                <div class="panel-content">
+                    <h2>Congratulations !</h2>
+                    <p>Your time: <span id="timer_stats_final"></span></p>
+                    <p>Love to hear your <a href="https://docs.google.com/forms/d/1ezKMNx8eQh3RbAD7V9dhhj6stsC2ZdixSoV3P-sXnvk/viewform">feedback</a> !</p>
+
+                    <input type="button" data-rel="close" data-icon="arrow-r" data-inline="true" value="NEW GAME" data-theme="e" id="new_game" />
+                </div>
+            </div>
+            <div data-role="header">
+                <h1>Swiss GeoPuzzle</h1>
+            </div>
+            <div data-role="content" id="map_content">
+                <div id="map_canvas"></div>
+                <div id="stats_polygons" class="panel">
+                    <h2 id="polygon_stats">0/0</h2>
+                    <div class="details">matched polygons</div>
+                </div>
+                <div id="stats_time" class="panel hidden">
+                    <h2 id="timer_stats">00:00</h2>
+                    <input type="button" value="Got stuck ?" id="load_polygon" />
+                    <div class="details">Draw a new polygon</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
