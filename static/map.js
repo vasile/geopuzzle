@@ -1,7 +1,6 @@
 var app_config = {
     geojson_feeds: {
-        Cantons: 'geojson/G3K12.geojson',
-        Districts: 'geojson/G3B12.geojson'
+        Cantons: 'geojson/G3K12.geojson'
     },
     area_mask_fusion_tables_query: {
         select: 'geometry',
