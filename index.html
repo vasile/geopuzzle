@@ -3,6 +3,15 @@
     <head>
         <title>Swiss geopuzzle</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+        <link href="static/images/favicon.ico" rel="shortcut icon" />
+        
+        <meta property="og:title" content="Swiss GeoPuzzle - How good are YOU at Swiss Geography ?"/>
+        <meta property="og:type" content="non_profit"/>
+        <meta property="og:url" content="http://maps.vasile.ch/geopuzzle/"/>
+        <meta property="og:image" content="http://maps.vasile.ch/geopuzzle/static/images/embed_social_200px.png"/>
+        
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
         <link href="static/map.css" rel="stylesheet" type="text/css" />
 
@@ -31,8 +40,8 @@
             <div data-role="panel" id="game_init">
                 <div class="panel-content">
                     <h2>Swiss GeoPuzzle</h2>
-                    <p>Scope of this game is to drag each geographical entity over its correct position on the map</p>
-
+                    <p>How good are you at Swiss Geography ? Try your skills by dragging and matching each polygon(canton) against the correct position on the map.</p>
+                    
                     <fieldset data-role="controlgroup" data-type="horizontal" id="game_type" class="hidden">
                         <legend>Choose the game type:</legend>
                         <div id="game_types"></div>
@@ -47,19 +56,20 @@
                     </fieldset>
                 
                     <input type="button" data-rel="close" data-icon="arrow-r" data-inline="true" value="START" data-theme="e" />
+                    
+                    <p>Created by <a href="http://www.vasile.ch/" target="_blank">Vasile Coțovanu</a> and based on the idea of <a href="http://www.morethanamap.com/demos/visualization/puzzle" target="_blank">Luke Mahe</a>.</p>
+                    <p>Geodata source: <a href="http://www.bfs.admin.ch/bfs/portal/en/index/themen/00/04.html" target="_blank">BFS</a>.</p>
+                    <p>Just <a href="https://twitter.com/vasile23" target="_blank">drop me a line</a> if you want to build a similar game for another country or region.</p>
                 </div>
             </div>
             <div data-role="panel" id="game_end">
                 <div class="panel-content">
                     <h2>Congratulations !</h2>
-                    <p>Your time: <span id="timer_stats_final"></span></p>
-                    <p>Love to hear your <a href="https://docs.google.com/forms/d/1ezKMNx8eQh3RbAD7V9dhhj6stsC2ZdixSoV3P-sXnvk/viewform">feedback</a> !</p>
-
-                    <input type="button" data-rel="close" data-icon="arrow-r" data-inline="true" value="NEW GAME" data-theme="e" id="new_game" />
+                    <p>Your time: <b><span id="timer_stats_final"></span></b></p>
+                    
+                    <p>Love to hear your <a href="https://docs.google.com/forms/d/1ezKMNx8eQh3RbAD7V9dhhj6stsC2ZdixSoV3P-sXnvk/viewform" target="_blank">feedback</a> !</p>
+                    <input type="button" value="START OVER" data-icon="arrow-l" data-inline="true" class="new_game" data-theme="e" data-ignore-warnings="yes" />
                 </div>
-            </div>
-            <div data-role="header">
-                <h1>Swiss GeoPuzzle</h1>
             </div>
             <div data-role="content" id="map_content">
                 <div id="map_canvas"></div>
@@ -69,8 +79,29 @@
                 </div>
                 <div id="stats_time" class="panel hidden">
                     <h2 id="timer_stats">00:00</h2>
-                    <input type="button" value="Got stuck ?" id="load_polygon" />
-                    <div class="details">Draw a new polygon</div>
+                    <input type="button" value="Stuck ?" id="load_polygon" data-theme="b" />
+                    <div class="details">Draw another polygon</div>
+                    <input type="button" value="NEW GAME" class="new_game" data-theme="e" />
+                </div>
+                <div id="game_bar_info" class="hidden"></div>
+                <div id="social">
+                    <div>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Swiss GeoPuzzle" data-lang="en">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </div>
+                    <div>
+                        <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fmaps.vasile.ch%2Fgeopuzzle%2F&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+                    </div>
+                    <div>
+                        <g:plusone size="medium"></g:plusone>
+                        <script type="text/javascript">
+                          (function() {
+                            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                            po.src = 'https://apis.google.com/js/plusone.js';
+                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                          })();
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>

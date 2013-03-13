@@ -35,14 +35,36 @@ body {
 
 #stats_polygons {
     position: absolute;
-    top: 50px;
-    right: 20px;
-    text-align: right;
+    bottom: 30px;
+    right: 10px;
+    text-align: center;
 }
 
 #stats_time {
     position: absolute;
-    bottom: 50px;
-    right: 50px;
-    text-align: right;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+}
+
+#social {
+    margin-top: 10px;
+}
+
+#social > div {
+    width: 80px;
+    overflow: hidden;
+    float: left;
+}
+
+#game_bar_info {
+    width: 200px;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    background-color: #222222;
+    margin-bottom: 50px;
+    text-align: center;
+    padding: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
 }

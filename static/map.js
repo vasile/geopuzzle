@@ -6,12 +6,27 @@ var app_config = {
         select: 'geometry',
         from: '812706',
         where: 'id = 1'
+    },
+    styles: {
+        polygon_draggable: {
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.1
+        },
+        polygon_final: {
+            strokeColor: '#347C17',
+            fillColor: '#347C2C',
+            fillOpacity: 0.8
+        }
     }
 };
 
 $(document).delegate("#map_page", "pageinit", function(){
     setTimeout(function(){
         $("#game_init").panel("open");
+        // $("#game_end").panel("open");
     }, 1000);
 });
 
@@ -107,6 +122,11 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         dismissible: false,
         position: 'right'
     });
+    $("#game_info").panel({
+        display: 'push',
+        dismissible: false,
+        position: 'right'
+    });
     
     var map = (function(){
         var mapBounds = app_data[game_type.getId()].bounds;
@@ -134,6 +154,12 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                 query: app_config.area_mask_fusion_tables_query
             });            
         }
+        
+        var el = $('#social')[0];
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(el);
+        
+        var el = $('#game_bar_info')[0];
+        map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(el);
         
         return map;
     })();
@@ -270,6 +296,7 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             $('#load_polygon').button("enable");
 
             timer.start();
+            $('#stats_info').removeClass('hidden');
             paintPolygon();
         }
         
@@ -300,15 +327,12 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
 
             overlay.polygon = new google.maps.Polygon({
                 paths: new_paths,
-                strokeColor: "#FF0000",
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: "#FF0000",
-                fillOpacity: 0.1,
                 map: map,
                 draggable: true,
                 zIndex: 2
             });
+            overlay.polygon.setOptions(app_config.styles.polygon_draggable);
+            
             overlay.polygon.set('did_not_move', true);
             overlay.polygon.set('overlay_id', overlay_id);
             
@@ -345,17 +369,21 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                 if (new_bounds.contains(overlay.bounds.getSouthWest()) && new_bounds.contains(overlay.bounds.getNorthEast())) {
                     overlay.polygon.setPaths(overlay.paths);
                     overlay.polygon.setOptions({
-                        strokeColor: '#347C17',
-                        fillColor: '#347C2C',
-                        fillOpacity: 0.8,
                         draggable: false,
                         zIndex: 1
                     });
+                    overlay.polygon.setOptions(app_config.styles.polygon_final);
 
                     paintPolygon();
                     ids_matched_no += 1;
                     
                     $('#polygon_stats').html(ids_matched_no + "/" + overlays.length);
+                    
+                    $('#game_bar_info').html(overlay.properties.NAME);
+                    $('#game_bar_info').removeClass('hidden');
+                    setTimeout(function(){
+                        $('#game_bar_info').addClass('hidden');
+                    }, 2000);
                     
                     if (ids_matched_no === overlays.length) {
                         timer.stop();
@@ -368,8 +396,18 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
 
         $('#load_polygon').click(paintPolygon);
         
-        $('#new_game').click(function(){
-            $("#game_init").panel("open");
+        $('.new_game').click(function(){
+            var yn = null;
+            if ($(this).attr('data-ignore-warnings') === 'yes') {
+                yn = true;
+            } else {
+                yn = confirm('Are you sure ? The current game progress will be lost !');
+            }
+
+            if (yn) {
+                timer.stop();
+                $("#game_init").panel("open");
+            }
         });
     })();
 });
