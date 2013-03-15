@@ -64,13 +64,12 @@ body {
 
 
 #game_bar_info {
-    width: 200px;
     opacity: 0.8;
     filter: alpha(opacity=80);
     background-color: #222222;
     margin-bottom: 50px;
     text-align: center;
-    padding: 2px;
+    padding: 5px 20px;
     color: #FFFFFF;
     font-weight: bold;
 }
