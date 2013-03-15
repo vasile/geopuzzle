@@ -26,11 +26,15 @@ var app_config = {
 $(document).delegate("#map_page", "pageinit", function(){
     setTimeout(function(){
         $("#game_init").panel("open");
-        // $("#game_end").panel("open");
     }, 1000);
 });
 
 $(document).delegate("#map_page", "pagebeforecreate", function(){
+    var ua_is_mobile = navigator.userAgent.indexOf('iPhone') !== -1 || navigator.userAgent.indexOf('Android') !== -1;
+    if (ua_is_mobile) {
+        $('body').addClass('mobile');
+    }
+    
     var app_data = (function(){
         var data = [];
         $.each(app_config.geojson_feeds, function(k, geojson_url){
@@ -141,6 +145,9 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             panControl: false,
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_LEFT
+            },
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.SMALL
             }
         };
         var map = new google.maps.Map($("#map_canvas")[0], mapOptions);
@@ -374,10 +381,10 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                     });
                     overlay.polygon.setOptions(app_config.styles.polygon_final);
 
-                    paintPolygon();
                     ids_matched_no += 1;
                     
                     $('#polygon_stats').html(ids_matched_no + "/" + overlays.length);
+                    paintPolygon();
                     
                     $('#game_bar_info').html(overlay.properties.NAME);
                     $('#game_bar_info').removeClass('hidden');
@@ -387,7 +394,10 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                     
                     if (ids_matched_no === overlays.length) {
                         timer.stop();
-                        $('#timer_stats_final').html($('#timer_stats').html());
+                        var timer_stats = $('#timer_stats').html();
+                        $('#timer_stats_final').html(timer_stats);
+                        var tweet_text = 'Solved the Swiss GeoPuzzle in ' + timer_stats + ' ! Who can beat my time ?';
+                        $('#game_end_tweet_placeholder').html('<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?hashtags=quiz&count=none&text=' + encodeURIComponent(tweet_text) + '" style="width:100px; height:20px;"></iframe>');
                         $("#game_end").panel("open");
                     }
                 }

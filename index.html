@@ -23,8 +23,8 @@
         
         <script type="text/javascript">
           var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-1022230-2']);
-          _gaq.push(['_setDomainName', '.vasile.ch']);
+          _gaq.push(['_setAccount', 'UA-1022230-11']);
+          _gaq.push(['_setDomainName', 'maps.vasile.ch']);
           _gaq.push(['_trackPageview']);
 
           (function() {
@@ -59,16 +59,19 @@
                     
                     <p>Created by <a href="http://www.vasile.ch/" target="_blank">Vasile Coțovanu</a> and based on the idea of <a href="http://www.morethanamap.com/demos/visualization/puzzle" target="_blank">Luke Mahe</a>.</p>
                     <p>Geodata source: <a href="http://www.bfs.admin.ch/bfs/portal/en/index/themen/00/04.html" target="_blank">BFS</a>.</p>
-                    <p>Just <a href="https://twitter.com/vasile23" target="_blank">drop me a line</a> if you want to build a similar game for another country or region.</p>
+
+                    <p>The game source code is available on <a href="https://github.com/vasile/geopuzzle" target="_blank">Github</a>. 
+                    <p>Just <a href="https://docs.google.com/forms/d/1ZWCqfF8OvRBlMPHMc5FbL6T3zYhQ-p18B8IIwMt1sRs/viewform" target="_blank">drop me a line</a> if you are not a programmer and you need assistance in building a similar game for your region/country.</p>
                 </div>
             </div>
             <div data-role="panel" id="game_end">
                 <div class="panel-content">
                     <h2>Congratulations !</h2>
-                    <p>Your time: <b><span id="timer_stats_final"></span></b></p>
-                    
-                    <p>Love to hear your <a href="https://docs.google.com/forms/d/1ezKMNx8eQh3RbAD7V9dhhj6stsC2ZdixSoV3P-sXnvk/viewform" target="_blank">feedback</a> !</p>
+                    <div>Your time: <b><span id="timer_stats_final"></span></b>
+                        <div id="game_end_tweet_placeholder"></div>
+                    </div>
                     <input type="button" value="START OVER" data-icon="arrow-l" data-inline="true" class="new_game" data-theme="e" data-ignore-warnings="yes" />
+                    <p>Love to hear your <a href="https://docs.google.com/forms/d/1ezKMNx8eQh3RbAD7V9dhhj6stsC2ZdixSoV3P-sXnvk/viewform" target="_blank">feedback</a> !</p>
                 </div>
             </div>
             <div data-role="content" id="map_content">
@@ -79,14 +82,14 @@
                 </div>
                 <div id="stats_time" class="panel hidden">
                     <h2 id="timer_stats">00:00</h2>
-                    <input type="button" value="Stuck ?" id="load_polygon" data-theme="b" />
+                    <input type="button" value="Stuck ?" id="load_polygon" data-theme="b" data-mini="true" />
                     <div class="details">Draw another polygon</div>
-                    <input type="button" value="NEW GAME" class="new_game" data-theme="e" />
+                    <input type="button" value="NEW GAME" class="new_game" data-theme="e" data-mini="true" />
                 </div>
                 <div id="game_bar_info" class="hidden"></div>
                 <div id="social">
                     <div>
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Swiss GeoPuzzle" data-lang="en">Tweet</a>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="How good are you at Swiss Geography ?" data-lang="en" data-hashtags="quiz,trivia">Tweet</a>
                         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                     </div>
                     <div>
