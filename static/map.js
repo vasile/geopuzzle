@@ -4,7 +4,7 @@ var app_config = {
     },
     area_mask_fusion_tables_query: {
         select: 'geometry',
-        from: '812706',
+        from: '1tDHsjdz7uhhAmWlmmwjR1P2Huf2LKMMiICPVdw',
         where: 'id = 1'
     },
     styles: {
