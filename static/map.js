@@ -128,6 +128,7 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         position: 'right'
     });
     
+    var mask_layer = null;
     var map = (function(){
         var mapBounds = app_data[game_type.getId()].bounds;
         
@@ -147,7 +148,7 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         map.fitBounds(mapBounds);
         
         if (app_config.area_mask_fusion_tables_query !== null) {
-            var layer = new google.maps.FusionTablesLayer({
+            mask_layer = new google.maps.FusionTablesLayer({
                 suppressInfoWindows: true,
                 clickable: false,
                 map: map,
@@ -233,6 +234,10 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             map.setOptions({
                 styles: styles[value]
             });
+            
+            if (mask_layer !== null) {
+                mask_layer.setMap(value === 'easy' ? map : null);
+            }
         }
         
         var selector = $('#difficulty input:radio');
