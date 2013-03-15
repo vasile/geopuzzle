@@ -2,11 +2,7 @@ var app_config = {
     geojson_feeds: {
         Cantons: 'geojson/G3K12.geojson'
     },
-    area_mask_fusion_tables_query: {
-        select: 'geometry',
-        from: '812706',
-        where: 'id = 1'
-    },
+    area_mask_fusion_tables_query: null,
     styles: {
         polygon_draggable: {
             strokeColor: "#FF0000",
