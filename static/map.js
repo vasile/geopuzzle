@@ -165,7 +165,7 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         var el = $('#social')[0];
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(el);
         
-        var el = $('#game_bar_info')[0];
+        el = $('#game_bar_info')[0];
         map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(el);
         
         return map;
@@ -402,7 +402,7 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                     }
                 }
             });
-        };
+        }
 
         $('#load_polygon').click(paintPolygon);
         
