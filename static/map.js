@@ -145,9 +145,6 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             panControl: false,
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_LEFT
-            },
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.SMALL
             }
         };
         var map = new google.maps.Map($("#map_canvas")[0], mapOptions);
