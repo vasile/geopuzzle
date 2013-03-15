@@ -1,0 +1,12 @@
+<FilesMatch "index.html">
+    FileETag None
+    Header set Expires "Sat, 26 Jul 1997 05:00:00 GMT"
+    Header set Cache-Control "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+    Header set Pragma "no-cache"
+</FilesMatch>
+
+<IfModule mod_deflate.c>
+    <FilesMatch "\.(js|json|geojson|css)$">
+        SetOutputFilter DEFLATE
+    </FilesMatch>
+</IfModule>

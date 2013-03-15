@@ -24,7 +24,7 @@ body {
 }
 
 .panel > h2 {
-    font-size: 3em;
+    font-size: 2.5em;
     margin: 0px;
 }
 
@@ -35,14 +35,56 @@ body {
 
 #stats_polygons {
     position: absolute;
-    top: 50px;
-    right: 20px;
-    text-align: right;
+    bottom: 30px;
+    right: 10px;
+    text-align: center;
 }
 
 #stats_time {
     position: absolute;
-    bottom: 50px;
-    right: 50px;
-    text-align: right;
+    top: 10px;
+    right: 10px;
+    text-align: center;
 }
+
+#social {
+    margin-top: 10px;
+}
+
+#social > div {
+    width: 80px;
+    overflow: hidden;
+    float: left;
+}
+
+#game_end_tweet_placeholder {
+    display: inline;
+    vertical-align: middle;
+}
+
+
+#game_bar_info {
+    width: 200px;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    background-color: #222222;
+    margin-bottom: 50px;
+    text-align: center;
+    padding: 2px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+/* START - "GOOD enough" small screen theme */
+body.mobile #stats_polygons, body.mobile #stats_time {
+    font-size: 50%;
+}
+
+body.mobile #social {
+    display: none;
+}
+
+body.mobile .panel-content {
+    font-size: 75%;
+}
+/* END */
