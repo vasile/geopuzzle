@@ -17,7 +17,13 @@
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        
+        <!-- programatically moving a polygon requires the geometry library -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
+        
+        <!-- use the moveTo extension - http://www.bram.us/2013/02/16/google-maps-v3-move-polygon/ -->
+        <script type="text/javascript" src="https://raw.github.com/bramus/google-maps-polygon-moveto/master/js/google.maps.Polygon.getBounds.js"></script>
+        <script type="text/javascript" src="https://raw.github.com/bramus/google-maps-polygon-moveto/master/js/google.maps.Polygon.moveTo.js"></script>
     
         <script src="static/map.js"></script>
     </head>
