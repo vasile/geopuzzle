@@ -9,7 +9,8 @@ var app_config = {
             strokeOpacity: 0.8,
             strokeWeight: 2,
             fillColor: "#FF0000",
-            fillOpacity: 0.1
+            fillOpacity: 0.1,
+            visible: true
         },
         polygon_final: {
             strokeColor: '#347C17',
@@ -324,7 +325,8 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             $.each(overlay.paths, function(k, path){
                 var new_path = [];
                 $.each(path, function(k, point){
-                    var new_point = new google.maps.LatLng(point.lat() + shift_y, point.lng() + shift_x);
+                    // setting offset here causes shape not to match if dragging it very far north or sourth on the map
+                    var new_point = new google.maps.LatLng(point.lat(), point.lng());
                     new_path.push(new_point);
                 });
                 new_paths.push(new_path);
@@ -334,8 +336,14 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                 paths: new_paths,
                 map: map,
                 draggable: true,
-                zIndex: 2
+                zIndex: 2,
+                // hide the polygon until after it has been moved from it's original location
+                visible: false
             });
+            
+            // move the polygon to the center of the screen
+            overlay.polygon.moveTo(map.getCenter());
+            
             overlay.polygon.setOptions(app_config.styles.polygon_draggable);
             
             overlay.polygon.set('did_not_move', true);
