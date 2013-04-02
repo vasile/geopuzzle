@@ -1,7 +1,7 @@
 ## GeoPuzzle
 This game tests your geography skills by let you dragging and matching each polygon against the correct position on the map. Inspired on [Luke Mahe's hack](http://www.morethanamap.com/demos/visualization/puzzle) on GMaps draggable polygons. 
 
-## DEMO 
+## Demo
 [Swiss cantons](http://maps.vasile.ch/geopuzzle/)
 
 ## Requirements
@@ -61,5 +61,9 @@ This game tests your geography skills by let you dragging and matching each poly
 ## Stay in touch
 
 Just [contact me](https://docs.google.com/forms/d/1ZWCqfF8OvRBlMPHMc5FbL6T3zYhQ-p18B8IIwMt1sRs/) if you are not a programmer and / or need help in building a similar game for your region/country.
+
+## Contributors
+
+* [John Pope](https://github.com/llamapope) - added [bramus](https://github.com/bramus/google-maps-polygon-moveto) google.maps.Polygon.moveTo support
 
 ## Have fun !
