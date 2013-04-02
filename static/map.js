@@ -321,27 +321,18 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             var overlay = overlays[overlay_id];
             ids_notpainted.splice(random_index, 1);
 
-            var shift_x = map.getCenter().lng() - overlay.bounds.getCenter().lng();
-            var shift_y = map.getCenter().lat() - overlay.bounds.getCenter().lat();
-
-            var new_paths = [];
-            $.each(overlay.paths, function(k, path){
-                var new_path = [];
-                $.each(path, function(k, point){
-                    var new_point = new google.maps.LatLng(point.lat() + shift_y, point.lng() + shift_x);
-                    new_path.push(new_point);
-                });
-                new_paths.push(new_path);
-            });
-
             overlay.polygon = new google.maps.Polygon({
-                paths: new_paths,
+                paths: overlay.paths,
                 map: map,
                 draggable: true,
-                zIndex: 2
+                zIndex: 2,
+                geodesic: true,
+                visible: false
             });
             overlay.polygon.setOptions(app_config.styles.polygon_draggable);
-            
+            overlay.polygon.moveTo(map.getCenter());
+            overlay.polygon.setVisible(true);
+
             overlay.polygon.set('did_not_move', true);
             overlay.polygon.set('overlay_id', overlay_id);
             
