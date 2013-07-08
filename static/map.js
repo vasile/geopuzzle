@@ -288,7 +288,7 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         
         var overlays, ids_notpainted, ids_matched_no, lastPolygon;
 
-        function game_init() {
+        function map_reset() {
             ids_notpainted = [];
             
             overlays = app_data[game_type.getId()].overlays;
@@ -300,8 +300,10 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                 ids_notpainted.push(overlay.id);
             });
             ids_matched_no = 0;
-            lastPolygon = null;
-            
+            lastPolygon = null;            
+        }
+
+        function ui_init() {
             $('#load_polygon').button("enable");
 
             timer.start();
@@ -309,7 +311,8 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             paintPolygon();
         }
         
-        $("#game_init").on("panelclose", game_init);
+        $("#game_init").on("panelopen", map_reset);
+        $("#game_init").on("panelclose", ui_init);
         function paintPolygon() {
             if (ids_notpainted.length === 0) {
                 $('#load_polygon').button("disable");
