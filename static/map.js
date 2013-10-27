@@ -405,6 +405,7 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                     
                     if ((typeof (overlay.properties.name)) !== 'undefined') {
                         $('#game_bar_help').html(overlay.properties.name);
+                        google.maps.event.trigger(map, 'resize');
                         $('#game_bar_help').removeClass('vis_hidden');
                         setTimeout(function(){
                             $('#game_bar_help').addClass('vis_hidden');
