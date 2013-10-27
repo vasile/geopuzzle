@@ -167,7 +167,7 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         var el = $('#social')[0];
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(el);
         
-        el = $('#game_bar_info')[0];
+        el = $('#game_bar_help')[0];
         map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(el);
         
         return map;
@@ -309,6 +309,10 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         }
 
         function ui_init() {
+            if (ua_is_mobile === false) {
+                $('#game_bar_help').removeClass('vis_hidden');
+            }
+            
             $('#load_polygon').button("enable");
 
             timer.start();
@@ -399,11 +403,13 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                     $('#polygon_stats').html(ids_matched_no + "/" + overlays.length);
                     paintPolygon();
                     
-                    $('#game_bar_info').html(overlay.properties.NAME).fadeIn();
-                    $('#game_bar_info').removeClass('hidden');
-                    setTimeout(function(){
-                        $('#game_bar_info').addClass('hidden');
-                    }, 2000);
+                    if ((typeof (overlay.properties.name)) !== 'undefined') {
+                        $('#game_bar_help').html(overlay.properties.name);
+                        $('#game_bar_help').removeClass('vis_hidden');
+                        setTimeout(function(){
+                            $('#game_bar_help').addClass('vis_hidden');
+                        }, 5000);
+                    }
                     
                     if (ids_matched_no === overlays.length) {
                         timer.stop();
