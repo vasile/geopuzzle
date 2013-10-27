@@ -4,8 +4,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "SG",
         "name": "St. Gallen",
-        "code": "SG"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg/25px-Coat_of_arms_of_canton_of_St._Gallen.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_St._Gallen"
       },
       "geometry": {
         "type": "Polygon",
@@ -1246,8 +1248,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "BS",
         "name": "Basel-Stadt",
-        "code": "BS"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Wappen_Basel-Stadt_matt.svg/25px-Wappen_Basel-Stadt_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Basel-Stadt"
       },
       "geometry": {
         "type": "Polygon",
@@ -1412,8 +1416,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "NW",
         "name": "Nidwalden",
-        "code": "NW"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Wappen_Nidwalden_matt.svg/25px-Wappen_Nidwalden_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Nidwalden"
       },
       "geometry": {
         "type": "Polygon",
@@ -1762,8 +1768,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "BE",
         "name": "Bern",
-        "code": "BE"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/4/47/Wappen_Bern_matt.svg/25px-Wappen_Bern_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Bern"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3972,8 +3980,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "SH",
         "name": "Schaffhausen",
-        "code": "SH"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Wappen_Schaffhausen_matt.svg/25px-Wappen_Schaffhausen_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Schaffhausen"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -4624,8 +4634,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "FR",
         "name": "Fribourg",
-        "code": "FR"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/0/01/Wappen_Freiburg_matt.svg/25px-Wappen_Freiburg_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Fribourg"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -6082,8 +6094,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "AR",
         "name": "Appenzell Ausserrhoden",
-        "code": "AR"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Wappen_Appenzell_Ausserrhoden_matt.svg/25px-Wappen_Appenzell_Ausserrhoden_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Appenzell_Ausserrhoden"
       },
       "geometry": {
         "type": "Polygon",
@@ -6536,8 +6550,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "GL",
         "name": "Glarus",
-        "code": "GL"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Wappen_Glarus_matt.svg/25px-Wappen_Glarus_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Glarus"
       },
       "geometry": {
         "type": "Polygon",
@@ -6938,8 +6954,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "TG",
         "name": "Thurgau",
-        "code": "TG"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/7/71/Wappen_Thurgau_matt.svg/25px-Wappen_Thurgau_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Thurgau"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -7738,8 +7756,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "SZ",
         "name": "Schwyz",
-        "code": "SZ"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/5/55/Wappen_des_Kantons_Schwyz.svg/25px-Wappen_des_Kantons_Schwyz.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Schwyz"
       },
       "geometry": {
         "type": "Polygon",
@@ -8244,8 +8264,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "AG",
         "name": "Aargau",
-        "code": "AG"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/25px-Wappen_Aargau_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Aargau"
       },
       "geometry": {
         "type": "Polygon",
@@ -9286,8 +9308,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "VS",
         "name": "Valais",
-        "code": "VS"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Wappen_Wallis_matt.svg/25px-Wappen_Wallis_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Valais"
       },
       "geometry": {
         "type": "Polygon",
@@ -10632,8 +10656,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "SO",
         "name": "Solothurn",
-        "code": "SO"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Wappen_Solothurn_matt.svg/25px-Wappen_Solothurn_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Solothurn"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -11892,8 +11918,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "JU",
         "name": "Jura",
-        "code": "JU"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Wappen_Jura_matt.svg/25px-Wappen_Jura_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Jura"
       },
       "geometry": {
         "type": "Polygon",
@@ -12570,8 +12598,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "BL",
         "name": "Basel-Landschaft",
-        "code": "BL"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/25px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Basel-Landschaft"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -13326,8 +13356,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "ZH",
         "name": "Zürich",
-        "code": "ZH"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Wappen_Z%C3%BCrich_matt.svg/25px-Wappen_Z%C3%BCrich_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Zurich"
       },
       "geometry": {
         "type": "Polygon",
@@ -14304,8 +14336,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "TI",
         "name": "Ticino",
-        "code": "TI"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/8/87/Wappen_Tessin_matt.svg/25px-Wappen_Tessin_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Ticino"
       },
       "geometry": {
         "type": "Polygon",
@@ -15344,8 +15378,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "AI",
         "name": "Appenzell Innerrhoden",
-        "code": "AI"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Wappen_Appenzell_Innerrhoden_matt.svg/25px-Wappen_Appenzell_Innerrhoden_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Appenzell_Innerrhoden"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -15660,8 +15696,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "NE",
         "name": "Neuchâtel",
-        "code": "NE"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Wappen_Neuenburg_matt.svg/25px-Wappen_Neuenburg_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Neuch%C3%A2tel"
       },
       "geometry": {
         "type": "Polygon",
@@ -16070,8 +16108,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "LU",
         "name": "Luzern",
-        "code": "LU"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/6/66/Wappen_Luzern_matt.svg/25px-Wappen_Luzern_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Lucerne"
       },
       "geometry": {
         "type": "Polygon",
@@ -16852,8 +16892,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "GE",
         "name": "Genève",
-        "code": "GE"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Wappen_Genf_matt.svg/25px-Wappen_Genf_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Geneva"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -17192,8 +17234,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "UR",
         "name": "Uri",
-        "code": "UR"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/1/10/Wappen_Uri_matt.svg/25px-Wappen_Uri_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Uri"
       },
       "geometry": {
         "type": "Polygon",
@@ -17758,8 +17802,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "VD",
         "name": "Vaud",
-        "code": "VD"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Wappen_Waadt_matt.svg/25px-Wappen_Waadt_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Vaud"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -19410,8 +19456,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "ZG",
         "name": "Zug",
-        "code": "ZG"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/3/31/Wappen_Zug_matt.svg/25px-Wappen_Zug_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Canton_of_Zug"
       },
       "geometry": {
         "type": "Polygon",
@@ -19688,8 +19736,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "GR",
         "name": "Graubünden",
-        "code": "GR"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/1/19/Wappen_Graub%C3%BCnden_matt.svg/25px-Wappen_Graub%C3%BCnden_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Graub%C3%BCnden"
       },
       "geometry": {
         "type": "Polygon",
@@ -21606,8 +21656,10 @@
     {
       "type": "Feature",
       "properties": {
+        "code": "OW",
         "name": "Obwalden",
-        "code": "OW"
+        "icon": "//upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Wappen_Obwalden_matt.svg/25px-Wappen_Obwalden_matt.svg.png",
+        "url": "http://en.wikipedia.org/wiki/Obwalden"
       },
       "geometry": {
         "type": "MultiPolygon",

@@ -1,4 +1,7 @@
 require 'json'
+require 'nokogiri'
+require 'open-uri'
+
 
 APP_PATH = File.expand_path(File.dirname(__FILE__)) + "/../"
 
@@ -21,11 +24,34 @@ def get_group_coordinates(groups)
   return groups
 end
 
+wiki_data = {}
+wiki_link = 'http://en.wikipedia.org/wiki/Cantons_of_Switzerland'
+doc = Nokogiri::HTML(open(wiki_link))
+doc.xpath('//table[@class="sortable wikitable"][tr/th[contains(.,"Coat of")]]/tr[td]').each do |tr|
+  key = tr.xpath('td[1]').text()
+  if tr.xpath('th[2]/a').length == 0
+    next
+  end
+
+  wiki_data[key] = {
+    "icon" => tr.xpath('th[1]/a/img').attr('src').text(),
+    "url" => 'http://en.wikipedia.org' + tr.xpath('th[2]/a').attr('href').text(),
+  }
+end
+
 json = JSON.parse(File.open(json_in, "r").read)
 json['features'].each do |f|
+  key = f['properties']['code'].nil? ? f['properties']['KURZ'] : f['properties']['code']
+  if wiki_data[key].nil?
+    p "ERROR: No wiki info found for #{new_properties['code']}"
+    exit
+  end
+  
   new_properties = {
+    'code' => key,
     'name' => f['properties']['name'].nil? ? f['properties']['NAME'] : f['properties']['name'],
-    'code' => f['properties']['code'].nil? ? f['properties']['KURZ'] : f['properties']['code'],
+    'icon' => wiki_data[key]['icon'],
+    'url' => wiki_data[key]['url'],
   }
 
   if f['geometry']['type'] == 'Polygon'
@@ -41,7 +67,7 @@ json['features'].each do |f|
   new_json['features'].push({
     'type' => 'Feature',
     'properties' => new_properties,
-    'geometry' => f['geometry']
+    'geometry' => f['geometry'],
   })
 end
 
