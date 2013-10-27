@@ -98,3 +98,8 @@ body.mobile .panel-content {
     font-size: 75%;
 }
 /* END */
+
+img.geometry {
+    width: 25px;
+    margin-top: 10px;
+}

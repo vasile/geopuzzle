@@ -332,6 +332,10 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             google.maps.event.addListener(map, 'click', paintPolygon);
         }
         
+        var infowindow = new google.maps.InfoWindow({
+            maxWidth: 200
+        });
+        
         $("#game_init").on("panelopen", map_reset);
         $("#game_init").on("panelclose", ui_init);
         function paintPolygon() {
@@ -397,6 +401,25 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                         zIndex: 1
                     });
                     overlay.polygon.setOptions(app_config.styles.polygon_final);
+                    
+                    google.maps.event.addListener(overlay.polygon, 'click', function(ev) {
+                        if (typeof(overlay.properties.name) === 'undefined') {
+                            return;
+                        }
+
+                        var window_content = '<div><b>' + overlay.properties.name + '</b>';
+                        if (typeof(overlay.properties.icon) !== 'undefined') {
+                            window_content += '<br/><img class="geometry" src="' + overlay.properties.icon + '"/>';
+                        }
+                        if (typeof(overlay.properties.url) !== 'undefined') {
+                            window_content += '<br/><a href="' + overlay.properties.url + '" target="_blank">More info</a>';
+                        }
+                        window_content += '</div>';
+                        
+                        infowindow.setPosition(ev.latLng);
+                        infowindow.setContent(window_content);
+                        infowindow.open(map);
+                    });
 
                     ids_matched_no += 1;
                     
