@@ -13,15 +13,16 @@
         <meta property="og:image" content="http://maps.vasile.ch/geopuzzle/static/images/embed_social_200px.png"/>
         
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
-        <link href="static/map.css" rel="stylesheet" type="text/css" />
+        <link href="static/map.css?v=2013-10-27" rel="stylesheet" type="text/css" />
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJkc_vUlnZCJzXfLWJR3oOeLbtEOoElpA&amp;sensor=false&amp;libraries=geometry"></script>
     
         <script type="text/javascript" src="ext/google-maps-polygon-moveto/js/google.maps.Polygon.getBounds.js"></script>
         <script type="text/javascript" src="ext/google-maps-polygon-moveto/js/google.maps.Polygon.moveTo.js"></script>
+        <script src="static/map.js?v=2013-10-27"></script>
+
 
         <script src="static/map.js"></script>
     </head>
@@ -75,7 +76,8 @@
                     <div class="details">Draw another polygon</div>
                     <input type="button" value="NEW GAME" class="new_game" data-theme="e" data-mini="true" />
                 </div>
-                <div id="game_bar_info" class="hidden"></div>
+
+                <div id="game_bar_help" class="vis_hidden game_bar">Stuck ? Press spacebar to draw a new polygon</div>
                 <div id="social">
                     <div>
                         <a href="https://twitter.com/share" class="twitter-share-button" data-text="How good are you at Swiss Geography ?" data-lang="en" data-hashtags="quiz,trivia">Tweet</a>

@@ -47,7 +47,7 @@ This game tests your geography skills by let you dragging and matching each poly
 	
 			{
 	    		select: 'geometry',
-	    		from: '812706',
+	    		from: '1tDHsjdz7uhhAmWlmmwjR1P2Huf2LKMMiICPVdw',
 	    		where: 'id = 1'
 			}
 			

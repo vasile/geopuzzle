@@ -32,6 +32,8 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         $('body').addClass('mobile');
     }
     
+    var overlays = [];
+    
     var app_data = (function(){
         var data = [];
         $.each(app_config.geojson_feeds, function(k, geojson_url){
@@ -100,6 +102,8 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         function setTypeId(value) {
             type_id = value;
             $('#polygon_stats').html("0/" + app_data[type_id].overlays.length);
+            
+            overlays = app_data[type_id].overlays;
         }
         setTypeId(type_id);
         
@@ -160,7 +164,7 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         var el = $('#social')[0];
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(el);
         
-        el = $('#game_bar_info')[0];
+        el = $('#game_bar_help')[0];
         map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(el);
         
         return map;
@@ -283,12 +287,11 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             };
         })();
         
-        var overlays, ids_notpainted, ids_matched_no, lastPolygon;
+        var ids_notpainted, ids_matched_no, lastPolygon;
 
-        function game_init() {
+        function map_reset() {
             ids_notpainted = [];
             
-            overlays = app_data[game_type.getId()].overlays;
             $.each(overlays, function(k, overlay){
                 if ((typeof overlay.polygon) !== 'undefined') {
                     overlay.polygon.setMap(null);
@@ -299,14 +302,39 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             ids_matched_no = 0;
             lastPolygon = null;
             
+            $('body').off('keyup');
+        }
+
+        function ui_init() {
+            if (ua_is_mobile === false) {
+                $('#game_bar_help').removeClass('vis_hidden');
+            }
+            
             $('#load_polygon').button("enable");
 
             timer.start();
             $('#stats_info').removeClass('hidden');
             paintPolygon();
+            
+            $( "#target" ).keyup(function() {
+              alert( "Handler for .keyup() called." );
+            });
+            
+            $('body').on('keyup', function(e){
+                if (e.keyCode === 32) {
+                    paintPolygon();
+                }
+            });
+            
+            google.maps.event.addListener(map, 'click', paintPolygon);
         }
         
-        $("#game_init").on("panelclose", game_init);
+        var infowindow = new google.maps.InfoWindow({
+            maxWidth: 200
+        });
+        
+        $("#game_init").on("panelopen", map_reset);
+        $("#game_init").on("panelclose", ui_init);
         function paintPolygon() {
             if (ids_notpainted.length === 0) {
                 $('#load_polygon').button("disable");
@@ -326,7 +354,6 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                 geodesic: true,
                 visible: false
             });
-            
             overlay.polygon.moveTo(map.getCenter());
             
             overlay.polygon.setOptions(app_config.styles.polygon_draggable);
@@ -373,17 +400,39 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                         zIndex: 1
                     });
                     overlay.polygon.setOptions(app_config.styles.polygon_final);
+                    
+                    google.maps.event.addListener(overlay.polygon, 'click', function(ev) {
+                        if (typeof(overlay.properties.name) === 'undefined') {
+                            return;
+                        }
+
+                        var window_content = '<div><b>' + overlay.properties.name + '</b>';
+                        if (typeof(overlay.properties.icon) !== 'undefined') {
+                            window_content += '<br/><img class="geometry" src="' + overlay.properties.icon + '"/>';
+                        }
+                        if (typeof(overlay.properties.url) !== 'undefined') {
+                            window_content += '<br/><a href="' + overlay.properties.url + '" target="_blank">More info</a>';
+                        }
+                        window_content += '</div>';
+                        
+                        infowindow.setPosition(ev.latLng);
+                        infowindow.setContent(window_content);
+                        infowindow.open(map);
+                    });
 
                     ids_matched_no += 1;
                     
                     $('#polygon_stats').html(ids_matched_no + "/" + overlays.length);
                     paintPolygon();
                     
-                    $('#game_bar_info').html(overlay.properties.NAME);
-                    $('#game_bar_info').removeClass('hidden');
-                    setTimeout(function(){
-                        $('#game_bar_info').addClass('hidden');
-                    }, 2000);
+                    if ((typeof (overlay.properties.name)) !== 'undefined') {
+                        $('#game_bar_help').html(overlay.properties.name);
+                        google.maps.event.trigger(map, 'resize');
+                        $('#game_bar_help').removeClass('vis_hidden');
+                        setTimeout(function(){
+                            $('#game_bar_help').addClass('vis_hidden');
+                        }, 5000);
+                    }
                     
                     if (ids_matched_no === overlays.length) {
                         timer.stop();
