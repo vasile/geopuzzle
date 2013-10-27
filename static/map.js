@@ -303,7 +303,9 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                 ids_notpainted.push(overlay.id);
             });
             ids_matched_no = 0;
-            lastPolygon = null;            
+            lastPolygon = null;
+            
+            $('body').off('keyup');
         }
 
         function ui_init() {
@@ -312,6 +314,16 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             timer.start();
             $('#stats_info').removeClass('hidden');
             paintPolygon();
+            
+            $( "#target" ).keyup(function() {
+              alert( "Handler for .keyup() called." );
+            });
+            
+            $('body').on('keyup', function(e){
+                if (e.keyCode === 32) {
+                    paintPolygon();
+                }
+            });
         }
         
         $("#game_init").on("panelopen", map_reset);
