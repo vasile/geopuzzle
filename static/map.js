@@ -397,7 +397,7 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                     $('#polygon_stats').html(ids_matched_no + "/" + overlays.length);
                     paintPolygon();
                     
-                    $('#game_bar_info').html(overlay.properties.NAME);
+                    $('#game_bar_info').html(overlay.properties.NAME).fadeIn();
                     $('#game_bar_info').removeClass('hidden');
                     setTimeout(function(){
                         $('#game_bar_info').addClass('hidden');
