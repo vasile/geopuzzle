@@ -35,6 +35,8 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         $('body').addClass('mobile');
     }
     
+    var overlays = [];
+    
     var app_data = (function(){
         var data = [];
         $.each(app_config.geojson_feeds, function(k, geojson_url){
@@ -103,6 +105,8 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
         function setTypeId(value) {
             type_id = value;
             $('#polygon_stats').html("0/" + app_data[type_id].overlays.length);
+            
+            overlays = app_data[type_id].overlays;
         }
         setTypeId(type_id);
         
@@ -286,12 +290,11 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
             };
         })();
         
-        var overlays, ids_notpainted, ids_matched_no, lastPolygon;
+        var ids_notpainted, ids_matched_no, lastPolygon;
 
         function map_reset() {
             ids_notpainted = [];
             
-            overlays = app_data[game_type.getId()].overlays;
             $.each(overlays, function(k, overlay){
                 if ((typeof overlay.polygon) !== 'undefined') {
                     overlay.polygon.setMap(null);
