@@ -324,6 +324,8 @@ $(document).delegate("#map_page", "pagebeforecreate", function(){
                     paintPolygon();
                 }
             });
+            
+            google.maps.event.addListener(map, 'click', paintPolygon);
         }
         
         $("#game_init").on("panelopen", map_reset);
