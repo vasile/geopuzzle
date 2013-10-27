@@ -2,6 +2,7 @@
 This game tests your geography skills by let you dragging and matching each polygon against the correct position on the map. Inspired on [Luke Mahe's hack](http://www.morethanamap.com/demos/visualization/puzzle) on GMaps draggable polygons. 
 
 ## Demo
+![Swiss cantons](static/images/github_badge_800px.jpg "Swiss cantons")
 [Swiss cantons](http://maps.vasile.ch/geopuzzle/)
 
 ## Requirements
